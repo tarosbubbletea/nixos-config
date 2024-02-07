@@ -4,7 +4,8 @@
   imports = [ 
     ./modules/fish/fish.nix
     ./modules/nvim/nvim.nix
-		./modules/hyprland/hyprland.nix
+    ./modules/hyprland/hyprland.nix
+    ./modules/greeter.nix
   ];
 
   home.username = "taro";
