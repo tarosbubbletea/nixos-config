@@ -23,7 +23,6 @@ in
   #     ${user} = import ./home.nix;
   #   };
   # };
-
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -134,9 +133,10 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
   environment.systemPackages = with pkgs; [
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
-		 vscode
+     vscode
      curl
      git
+     jq
   ];
 
 	environment.sessionVariables = {

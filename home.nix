@@ -25,9 +25,10 @@
   };
 
   my.home.packages = with pkgs; [
-		nixd
-		bun
-		btop
+	nixd
+	bun
+	btop
+    python3
 
     (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" "FiraCode" "JetBrainsMono" ]; })
 
