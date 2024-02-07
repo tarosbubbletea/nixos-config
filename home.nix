@@ -31,6 +31,7 @@
     python3
     pciutils
     google-chrome
+    inotify-tools
     # (python3.withPackages (ps: with ps; [  ]))
 
     #nerdfonts #unironically faster to pull all fonts and then fc-list | grep than to look around in the wiki
