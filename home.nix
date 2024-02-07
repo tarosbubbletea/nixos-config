@@ -24,6 +24,7 @@
     home-manager.enable = true;
   };
 
+  virtualisation.docker.enable = true;
   my.home.packages = with pkgs; [
 	nixd
 	bun
@@ -32,6 +33,8 @@
     pciutils
     google-chrome
     inotify-tools
+    prismlauncher
+    zulu17
     # (python3.withPackages (ps: with ps; [  ]))
 
     #nerdfonts #unironically faster to pull all fonts and then fc-list | grep than to look around in the wiki
@@ -67,6 +70,7 @@
     # '';
   };
 
+  #doesn't work properly... what a pain
   systemd.user.services.waynergy-client = {
     after = [ "network.target" "graphical-session.target" ];
     description = "Waynergy client";

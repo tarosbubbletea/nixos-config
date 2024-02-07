@@ -131,5 +131,5 @@ if [ $? -eq 1 ] ; then
     swww init
 fi
 
-Wall_Set
+# Wall_Set
 
