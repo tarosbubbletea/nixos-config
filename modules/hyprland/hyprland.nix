@@ -5,8 +5,6 @@
 		./waybar.nix
 	];
 
-  my.home.file."~/.config/init.sh".source = lib.file.mkOutOfStoreSymlink ./init.sh;
-
   programs.hyprland.enable = true;
 	my.home.packages = with pkgs; [
 		waybar
@@ -164,9 +162,10 @@
         # See https://wiki.hyprland.org/Configuring/Keywords/ for more
         $mainMod = SUPER
 
+
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-        bind = $mainMod, Q, exec, $terminal
-        bind = $mainMod, C, killactive,
+        bind = CTRL, ALT, T, exec, $terminal
+        bind = $mainMod, Q, killactive,
         bind = $mainMod, M, exit,
         bind = $mainMod, E, exec, $fileManager
         bind = $mainMod, V, togglefloating,

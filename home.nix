@@ -3,6 +3,7 @@
 {
   imports = [ 
     (lib.mkAliasOptionModule ["my"] ["home-manager" "users" "${user}"])
+    ./modules/symlinks.nix
     ./modules/fish/fish.nix
     ./modules/nvim/nvim.nix
     ./modules/hyprland/hyprland.nix

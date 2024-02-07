@@ -19,9 +19,4 @@
     extraConfig = lib.fileContents ./init.vim;
     viAlias = true;
   };
-
-  my.home = {
-
-    file.".config/nvim/coc-settings.json".source = lib.file.mkOutOfStoreSymlink ./coc-settings.json;
-  };
 }
