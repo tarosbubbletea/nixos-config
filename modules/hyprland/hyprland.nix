@@ -164,7 +164,7 @@
 
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-        bind = CTRL, ALT, T, exec, $terminal
+        bind = CTRL ALT, T, exec, $terminal
         bind = $mainMod, Q, killactive,
         bind = $mainMod, M, exit,
         bind = $mainMod, E, exec, $fileManager

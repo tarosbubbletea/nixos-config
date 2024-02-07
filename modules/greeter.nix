@@ -1,6 +1,7 @@
 { pkgs, user, ... }:
 
 {
+  #uh... no login? i guess
   services.greetd = {
     enable = true;
     restart = false;
