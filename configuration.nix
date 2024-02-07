@@ -17,10 +17,18 @@ in
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  # home-manager = {
+  #   extraSpecialArgs = { inherit inputs filesIn user environment; };
+  #   users = {
+  #     ${user} = import ./home.nix;
+  #   };
+  # };
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      # inputs.home-manager.nixosModules.default
+      ./home.nix
 		];
 
 
@@ -93,13 +101,6 @@ in
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     shell = pkgs.fish;
-  };
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs filesIn user environment; };
-    users = {
-      ${user} = import ./home.nix;
-    };
   };
 
   security.sudo.extraConfig = ''

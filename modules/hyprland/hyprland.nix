@@ -1,11 +1,11 @@
-{config, lib, pkgs, user, environment, ...}:
+{config, lib, pkgs, user, inputs, ...}:
 
 {
 	imports = [
 		./waybar.nix
 	];
 
-	home.packages = with pkgs; [
+	my.home.packages = with pkgs; [
 		waybar
 		#(pkgs.waybar.overrideAttrs (oldAttrs: {
 		#	mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -20,7 +20,7 @@
 		kitty
 	];
 
-	wayland.windowManager.hyprland = {
+	my.wayland.windowManager.hyprland = {
   	  enable = true;
       #nvidiaPatches = true;
 	  systemd.enable = true;
@@ -213,6 +213,6 @@
       '';
 	};
 	
-    home.file."wall.jpg".source = ./1.jpg;
+  my.home.file."wall.jpg".source = ./1.jpg;
 
 }

@@ -1,18 +1,28 @@
-{ user, config, pkgs, inputs, filesIn, environment, ... }:
+{ user, config, pkgs, inputs, filesIn, lib, ... }:
 
 {
   imports = [ 
+    (lib.mkAliasOptionModule ["my"] ["home-manager" "users" "${user}"])
     ./modules/fish/fish.nix
     ./modules/nvim/nvim.nix
     ./modules/hyprland/hyprland.nix
-    ./modules/greeter.nix
   ];
 
-  home.username = "taro";
-  home.homeDirectory = "/home/taro";
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  my.home.username = "taro";
+  my.home.homeDirectory = "/home/taro";
+  my.home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
+  #fix that flake command-not-found problem
+  my.programs = {
+    nix-index =
+    {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    home-manager.enable = true;
+  };
+
+  my.home.packages = with pkgs; [
 		nixd
 		bun
 		btop
@@ -23,15 +33,17 @@
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
     # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
+    #   echo "Hello, ${config.home-manager.username}!"
     # ''
     (pkgs.writeShellScriptBin "nix-apply" ''sudo nixos-rebuild switch --flake /etc/nixos/#default $1'')
-    (pkgs.writeShellScriptBin "nix-gens" ''sudo nix-env --list-generations --profile /nix/var/nix/profiles/system'')
+    (pkgs.writeShellScriptBin "nix-gens" ''sudo nix-env --list-generations --profile /nix/var/nix/profiles/system $1'')
+    (pkgs.writeShellScriptBin "nix-gens-del" ''sudo nix-env --delete-generations $1'')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
+  # plain files is through 'home-manager.file'.
+  my.home.file = {
+    "/home/${user}/.ssh/authorized_keys".source = ./ssh.pub;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -45,7 +57,7 @@
   };
 
   # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
+  # 'home-manager.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
   # either
   #
@@ -59,19 +71,7 @@
   #
   #  /etc/profiles/per-user/taro/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
+  my.home.sessionVariables = {
     EDITOR = "nvim";
-    
   };
-
-  #raw files
-  home.file."/home/${user}/.ssh/authorized_keys".source = ./ssh.pub;
-
-  #fix that flake command-not-found problem
-  programs.nix-index =
-  {
-    enable = true;
-    enableFishIntegration = true;
-  };
-  programs.home-manager.enable = true;
 }
