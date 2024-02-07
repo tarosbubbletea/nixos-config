@@ -4,6 +4,7 @@
   imports = [ 
     ./modules/fish/fish.nix
     ./modules/nvim/nvim.nix
+		./modules/hyprland/hyprland.nix
   ];
 
   home.username = "taro";
@@ -12,7 +13,23 @@
 
   home.packages = with pkgs; [
 		nixd
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+		bun
+		nodejs
+
+		waybar
+		(pkgs.waybar.overrideAttrs (oldAttrs: {
+			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+			})
+		)
+
+		dunst
+		libnotify
+		rofi-wayland
+		networkmanagerapplet
+		kitty
+
+
+    (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -20,7 +37,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # ''
-    (pkgs.writeShellScriptBin "nix-apply" ''sudo nixos-rebuild switch --flake /etc/nixos/#default'')
+    (pkgs.writeShellScriptBin "nix-apply" ''sudo nixos-rebuild switch --flake /etc/nixos/#default $1'')
     (pkgs.writeShellScriptBin "nix-gens" ''sudo nix-env --list-generations --profile /nix/var/nix/profiles/system'')
   ];
 

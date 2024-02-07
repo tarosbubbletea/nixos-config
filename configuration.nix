@@ -14,7 +14,6 @@ in
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
   nix.gc.options = "--delete-older-than +5"; #i do a lot of edits :)
-	boot.loader.systemd-boot.configurationLimit = 5;
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
@@ -27,9 +26,17 @@ in
 	boot.loader = {
 		efi = {
 			canTouchEfiVariables = true;
-			efiSysMountPoint = "/boot/efi";
+			#efiSysMountPoint = "/boot/efi";
 		};
+		#grub = {
+		#	efiSupport = true;
+		#	device = "nodev";
+		#};
+		systemd-boot.enable = true;
+		systemd-boot.configurationLimit = 5;
 	};
+
+	boot.kernelParams = [ "i915.force_probe=46d2" ];
 	boot.plymouth.enable = true;
 	nixos-boot = {
 		enable = true;
@@ -41,7 +48,6 @@ in
     # If you want to make sure the theme is seen when your computer starts too fast
     # duration = 3; # in seconds
 	};
-  #boot.loader.systemd-boot.enable = true;
 
   networking.hostName = "mocha"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -139,6 +145,21 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
      curl
      git
   ];
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+	};
+
+	sound.enable = true;
+	security.rtkit.enable = true;
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
+		pulse.enable = true;
+		jack.enable = true;
+	};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
