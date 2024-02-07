@@ -1,6 +1,8 @@
 { config, pkgs, inputs, user, ...}:
 
 {
+  programs.fish.enable = true;
+  users.users.${user}.shell = pkgs.fish;
   my.programs.fish = {
     enable = true;  
     shellInit = builtins.readFile ./config.fish;

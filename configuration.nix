@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ user, config, pkgs, inputs, environment, ... }:
+{ user, config, pkgs, inputs, ... }:
 
 let
   filesIn = dir: (map (fname: dir + "/${fname}")
@@ -90,17 +90,10 @@ in
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  programs.fish.enable = true;
-  programs.hyprland.enable = true;
-	services.xserver.displayManager.gdm.enable = true;
-	services.xserver.displayManager.gdm.wayland = true;
-
-
 	users.users.${user} = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
-    shell = pkgs.fish;
   };
 
   security.sudo.extraConfig = ''
@@ -131,7 +124,7 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
     	uptime.prefix = "up and going for";
 	filesystems.root = "/";
 	memory.swap_pos = "beside";
-	last_login = { "taro" = 1; };
+	last_login = { "${user}" = 1; };
     };
   };
 

@@ -5,6 +5,9 @@
 		./waybar.nix
 	];
 
+  my.home.file."~/.config/init.sh".source = lib.file.mkOutOfStoreSymlink ./init.sh;
+
+  programs.hyprland.enable = true;
 	my.home.packages = with pkgs; [
 		waybar
 		#(pkgs.waybar.overrideAttrs (oldAttrs: {
@@ -12,6 +15,7 @@
 		#	})
 		#)
 
+        dolphin
 		swww
 		dunst
 		libnotify
@@ -42,6 +46,7 @@
 
         # Execute your favorite apps at launch
         # exec-once = waybar & hyprpaper & firefox
+        exec-once = ~/.config/init.sh
 
         # Source a file (multi-file configs)
         # source = ~/.config/hypr/myColors.conf

@@ -22,6 +22,6 @@
 
   my.home = {
 
-    file.".config/nvim/coc-settings.json".source = ./coc-settings.json;
+    file.".config/nvim/coc-settings.json".source = lib.file.mkOutOfStoreSymlink ./coc-settings.json;
   };
 }

@@ -6,10 +6,11 @@
     ./modules/fish/fish.nix
     ./modules/nvim/nvim.nix
     ./modules/hyprland/hyprland.nix
+    ./modules/greeter.nix
   ];
 
-  my.home.username = "taro";
-  my.home.homeDirectory = "/home/taro";
+  my.home.username = "${user}";
+  my.home.homeDirectory = "/home/${user}";
   my.home.stateVersion = "23.11"; # Please read the comment before changing.
 
   #fix that flake command-not-found problem
@@ -35,9 +36,9 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home-manager.username}!"
     # ''
-    (pkgs.writeShellScriptBin "nix-apply" ''sudo nixos-rebuild switch --flake /etc/nixos/#default $1'')
-    (pkgs.writeShellScriptBin "nix-gens" ''sudo nix-env --list-generations --profile /nix/var/nix/profiles/system $1'')
-    (pkgs.writeShellScriptBin "nix-gens-del" ''sudo nix-env --delete-generations $1'')
+    (pkgs.writeShellScriptBin "nix-apply" ''sudo nixos-rebuild switch --flake /etc/nixos/#default $@'')
+    (pkgs.writeShellScriptBin "nix-gens" ''sudo nix-env --list-generations --profile /nix/var/nix/profiles/system $@'')
+    (pkgs.writeShellScriptBin "nix-gens-del" ''sudo nix-env --delete-generations $@'')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

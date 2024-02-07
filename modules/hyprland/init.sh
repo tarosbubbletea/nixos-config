@@ -3,7 +3,7 @@
 swww init &
 
 # setting wallpaper
-swww img ~/Wallpapers/wall.jpg &
+swww img ~/wall.jpg &
 
 # nm applet daemon
 nm-applet --indicator &
