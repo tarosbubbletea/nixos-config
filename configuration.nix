@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ user, config, pkgs, inputs, ... }:
+{ user, config, pkgs, inputs, environment, ... }:
 
 let
   filesIn = dir: (map (fname: dir + "/${fname}")
@@ -21,7 +21,12 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+			inputs.nixos-boot.nixosModules.default
     ];
+
+	boot.blacklistedKernelModules = [
+		"rtw88_8821ce"
+	];
 
 	boot.loader = {
 		efi = {
@@ -37,6 +42,7 @@ in
 	};
 
 	boot.kernelParams = [ "i915.force_probe=46d2" ];
+	boot.extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
 	boot.plymouth.enable = true;
 	nixos-boot = {
 		enable = true;
@@ -48,6 +54,8 @@ in
     # If you want to make sure the theme is seen when your computer starts too fast
     # duration = 3; # in seconds
 	};
+
+	
 
   networking.hostName = "mocha"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -99,7 +107,7 @@ in
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs filesIn user; };
+    extraSpecialArgs = { inherit inputs filesIn user environment; };
     users = {
       ${user} = import ./home.nix;
     };
@@ -138,6 +146,7 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
   };
 
 
+
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -146,11 +155,31 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
      git
   ];
 
-	xdg.portal = {
-		enable = true;
-		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+	environment.sessionVariables = {
+		NIXOZ_OZONE_WL = "1";
 	};
 
+	hardware = {
+		opengl.enable = true;
+		opengl.extraPackages = with pkgs; [
+			intel-media-driver
+			#vaapiIntel
+			vaapiVdpau
+			libvdpau-va-gl
+		];
+	};
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [pkgs.xdg-desktop-portal-gtk];
+		config = {
+  		common = {
+    		default = [
+      		"gtk"
+    		];
+  		};
+		};
+	};
 	sound.enable = true;
 	security.rtkit.enable = true;
 	services.pipewire = {

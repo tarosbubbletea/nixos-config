@@ -1,4 +1,4 @@
-{ user, config, pkgs, inputs, filesIn, ... }:
+{ user, config, pkgs, inputs, filesIn, environment, ... }:
 
 {
   imports = [ 
@@ -15,19 +15,6 @@
 		nixd
 		bun
 		nodejs
-
-		waybar
-		(pkgs.waybar.overrideAttrs (oldAttrs: {
-			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-			})
-		)
-
-		dunst
-		libnotify
-		rofi-wayland
-		networkmanagerapplet
-		kitty
-
 
     (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
