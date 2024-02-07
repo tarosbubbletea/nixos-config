@@ -13,6 +13,7 @@
       ".config/init.sh".source = config.lib.meta.mkMutableSymlink ./hyprland/init.sh;
       ".config/waybar".source = config.lib.meta.mkMutableSymlink ./hyprland/waybar;
       ".config/hypr".source = config.lib.meta.mkMutableSymlink ./hyprland/hypr;
+      ".config/kitty/kitty.conf".source = config.lib.meta.mkMutableSymlink ./hyprland/kitty.conf;
     };
 
   };

@@ -49,7 +49,7 @@
         "format": "  {}",
         "separate-outputs": true,
         "rewrite": {
-            "n30@eOS:(.*)": "$1 ",
+            "n30@eOS:(.*)": "$1 ",
             "(.*) — Mozilla Firefox": "$1 󰈹",
             "(.*)Mozilla Firefox": "Firefox 󰈹",
             "(.*) - Visual Studio Code": "$1 󰨞",

@@ -137,6 +137,8 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
      curl
      git
      jq
+     lm_sensors.out
+     waynergy
   ];
 
 	environment.sessionVariables = {
@@ -187,10 +189,12 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
     settings.PasswordAuthentication = true;
     settings.PermitRootLogin = "yes";
   };
-  services.synergy.client = {
-    enable = true;
-    serverAddress = "192.168.1.11";
-  };
+#   services.synergy.client = {
+#     enable = true;
+#     serverAddress = "192.168.1.11";
+#     autoStart = true;
+#   };
+#   services.synergy.server.enable = false;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
