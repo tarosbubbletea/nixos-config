@@ -1,0 +1,64 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1707175763,
+        "narHash": "sha256-0MKHC6tQ4KEuM5rui6DjKZ/VNiSANB4E+DJ/+wPS1PU=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "f99eace7c167b8a6a0871849493b1c613d0f1b80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-boot": {
+      "locked": {
+        "lastModified": 1702844043,
+        "narHash": "sha256-Dc/sL+IDpPmY6lxPRzMj85cX1ubwLlkkc79NOMxkrUs=",
+        "owner": "Melkor333",
+        "repo": "nixos-boot",
+        "rev": "75cdbb0dfd1c29d36fa5021651c4cf624afac892",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Melkor333",
+        "repo": "nixos-boot",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1707092692,
+        "narHash": "sha256-ZbHsm+mGk/izkWtT4xwwqz38fdlwu7nUUKXTOmm4SyE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "faf912b086576fd1a15fca610166c98d47bc667e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixos-boot": "nixos-boot",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
