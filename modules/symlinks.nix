@@ -11,8 +11,9 @@
     home.file = {
       ".config/nvim/coc-settings.json".source = config.lib.meta.mkMutableSymlink ./nvim/coc-settings.json;
       ".config/init.sh".source = config.lib.meta.mkMutableSymlink ./hyprland/init.sh;
+      #more than half the settings are stolen (not gonna read the whole bible they have in their site)
       ".config/waybar".source = config.lib.meta.mkMutableSymlink ./hyprland/waybar;
-      ".config/hypr".source = config.lib.meta.mkMutableSymlink ./hyprland/hypr;
+      ".config/hypr".source = config.lib.meta.mkMutableSymlink ./hyprland/hypr; 
       ".config/kitty/kitty.conf".source = config.lib.meta.mkMutableSymlink ./hyprland/kitty.conf;
     };
 
