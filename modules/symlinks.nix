@@ -15,6 +15,11 @@
       ".config/waybar".source = config.lib.meta.mkMutableSymlink ./hyprland/waybar;
       ".config/hypr".source = config.lib.meta.mkMutableSymlink ./hyprland/hypr; 
       ".config/kitty/kitty.conf".source = config.lib.meta.mkMutableSymlink ./hyprland/kitty.conf;
+
+
+      ".config/waynergy/config.ini".source = config.lib.meta.mkMutableSymlink ./way.ini;
+      ".config/waynergy/xkb_keymap".source = config.lib.meta.mkMutableSymlink ./way_xkb;
+      ".config/xkb/keycodes/win".source = config.lib.meta.mkMutableSymlink ./way_key;
     };
 
   };

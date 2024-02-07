@@ -52,27 +52,6 @@
   my.home.file = {
     "/home/${user}/.ssh/authorized_keys".source = ./ssh.pub;
 
-    # adjust xkb_key_offset based on trial and error
-    "/home/${user}/.config/waynergy/config.ini".text = ''
-
-      host = 192.168.1.11
-      name = mocha
-      width = 1920
-      height = 1080
-      xkb_key_offset = 8
-      [idle-inhibit]
-      method = key
-      keyname = HYPR
-      [tls]
-      enable = true
-      tofu = true
-    #   [log]
-    #   level=3
-    #   mode=a
-    #   path=/tmp/waynergy.log
-    #   [wayland]
-    #   flush_timeout=5000
-    '';
     #I should buy a raspberry pi and make a kvm switch at this point LMFAO this is awful
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in

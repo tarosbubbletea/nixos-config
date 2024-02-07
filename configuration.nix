@@ -4,6 +4,8 @@
 
 { user, config, pkgs, inputs, ... }:
 
+
+#sudo sensors-detect
 let
   filesIn = dir: (map (fname: dir + "/${fname}")
                  (builtins.attrNames (builtins.readDir dir)));
