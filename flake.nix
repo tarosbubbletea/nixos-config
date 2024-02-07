@@ -3,13 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-		nixos-boot.url = "github:Melkor333/nixos-boot";
-
-    home-manager = {
+    
+		home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+		vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -28,7 +27,10 @@
 				modules = [ 
  						./configuration.nix
 						inputs.home-manager.nixosModules.default
-						inputs.nixos-boot.nixosModules.default
+						inputs.vscode-server.nixosModules.default
+        ({ config, pkgs, ... }: {
+          services.vscode-server.enable = true;
+        })
 				];
 			};
 

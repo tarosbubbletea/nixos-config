@@ -21,12 +21,8 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-			inputs.nixos-boot.nixosModules.default
-    ];
+		];
 
-	boot.blacklistedKernelModules = [
-		"rtw88_8821ce"
-	];
 
 	boot.loader = {
 		efi = {
@@ -41,19 +37,7 @@ in
 		systemd-boot.configurationLimit = 5;
 	};
 
-	boot.kernelParams = [ "i915.force_probe=46d2" ];
-	boot.extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
-	boot.plymouth.enable = true;
-	nixos-boot = {
-		enable = true;
-    # Different colors
-    # bgColor.red   = 100; # 0 - 255
-    # bgColor.green = 100; # 0 - 255
-    # bgColor.blue  = 100; # 0 - 255
-
-    # If you want to make sure the theme is seen when your computer starts too fast
-    # duration = 3; # in seconds
-	};
+	boot.plymouth.enable = false;
 
 	
 
@@ -99,7 +83,12 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.fish.enable = true;
-  users.users.${user} = {
+  programs.hyprland.enable = true;
+	services.xserver.displayManager.gdm.enable = true;
+	services.xserver.displayManager.gdm.wayland = true;
+
+
+	users.users.${user} = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
@@ -151,6 +140,7 @@ Welcome to NixOS ${config.system.nixos.release} (${config.system.nixos.codeName}
   environment.systemPackages = with pkgs; [
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
+		 vscode
      curl
      git
   ];

@@ -14,7 +14,7 @@
   home.packages = with pkgs; [
 		nixd
 		bun
-		nodejs
+		btop
 
     (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
