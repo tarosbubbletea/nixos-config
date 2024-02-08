@@ -1,0 +1,5 @@
+waybar kept trying to delete its own settings for some reason
+vscode-server broke nvim's node install for coc
+many icons are missing for the bar
+keybinds are unusable in synergy
+but at the very least, I got wifi working, so that's good.
